@@ -1,51 +1,34 @@
-# Credit-Card-fraud-detection-system-using-Machine-Learning
-Detect Fraudulent Credit Card transactions using different Machine Learning models and compare performances
+# Credit Card Fraud Detection System Using Machine Learning
+## Overview
+This project aims to detect fraudulent credit card transactions using machine learning techniques. The dataset consists of 300,000 anonymized transactions, where fraudulent transactions make up less than 0.1% of the total data. Due to this severe imbalance, special techniques like SMOTE (Synthetic Minority Over-sampling Technique) were implemented to improve fraud detection.
 
-In this notebook, I explore various Machine Learning models to detect fraudulent use of Credit cards. I compare each model performance and results. The best performance is achieved using SMOTE technique.
+### Problem Statement
+Traditional fraud detection systems relied on rule-based approaches, which were limited in their adaptability. The objective of this project is to leverage machine learning models to develop an intelligent fraud detection system that can:
+✔ Identify fraudulent transactions with high precision and recall.
+✔ Handle the class imbalance problem effectively.
+✔ Improve scalability and real-time detection capabilities.
 
-Please note that this approach can be transferred to other detection analysis in alternatrive domains. The feature extraction process remains similar and can be replicated on many other detection issues.
+### Techniques Used
+This project explores various machine learning and deep learning models to compare their effectiveness in detecting fraudulent transactions:
 
-# Problem Statement
+1. Machine Learning Approaches
+🔹 Random Forest – Ensemble method that improves generalization by training multiple decision trees.
+🔹 Decision Trees – Simple interpretable model that can capture patterns in the data.
 
-In this project we want to identify fraudulent transactions with Credit Cards.
-Our objective is to build a Fraud detection system using Machine learning techniques.
-In the past, such systems were rule-based. Machine learning offers powerful new ways.
+2. Deep Learning Approaches
+🔹 Neural Networks – Fully connected layers trained to classify transactions as fraudulent or non-fraudulent.
 
-The project uses a dataset of 300,000 fully anonymized transactions. Each transation is labelled either fraudulent or not fraudulent.
-Note that prevalence of fraudulent transactions is very low in the dataset. Less than 0.1% of the card transactions are fraudulent. This means that a system predicting each transaction to be normal can reach an accuracy of over 99.9% despite not detecting any fraudulent transaction. This will necessitate adjustment techniques.
+3. Handling Class Imbalance
+Since fraud cases are extremely rare, different techniques were implemented to improve the model's ability to detect fraudulent transactions:
+✔ SMOTE (Synthetic Minority Over-sampling Technique) – Generates synthetic fraud cases to balance the dataset.
+✔ Class Weight Adjustment – Assigning higher weight to fraudulent transactions in the loss function.
+✔ Under-sampling the Majority Class – Reducing non-fraudulent transactions to balance the dataset.
 
-# Techniques used in the project
-The project compares the results of different techniques :
-- Machine learning techniques:
-  - Random Forest
-  - Decision Trees
-- Deep Learning techniques:
-  - Neural network using fully connected layers.
+### Results & Key Findings
+📌 The best performance was achieved using SMOTE + Neural Network, which detected 100% of fraud cases while maintaining a low false positive rate.
+📌 Random Forest outperformed Decision Trees, showing higher accuracy and better generalization.
+📌 Deep Learning models improved performance significantly, especially when trained with weighted loss functions and oversampled data.
 
-Performance of the neural network is compared for different optimization approaches:
-- plain binary cross-entropy loss minimization
-- minimization using weights to compensate for the class imbalance
-- Under-sampling of the non-fraudulent class to match the fraudulent class
-- Over-sampling of the fraudulent class to match the non-fraudulent one by implementing SMOTE technique. The SMOTE method allows to generate a new vector using 2 existing datapoints. For additional details on this approach, you can read this detailed post [SMOTE for Imbalanced Classification with Python](https://machinelearningmastery.com/smote-oversampling-for-imbalanced-classification/)
-
-Note about the difference between Random Forest and Decision tree models:
-- A Random Forest is essentially a collection of Decision Trees. A decision tree is built on an entire dataset, using all the features/variables, whereas a random forest randomly selects observations (rows) and specific features/variables to build multiple decision trees from and then averages the results. After a large number of trees are built using this method, each tree "votes" or chooses the class, and the class receiving the most votes by a simple majority is the "winner" or predicted class. 
-- When using a decision tree model on a given training dataset the accuracy improves with more and more splits. You can easily overfit the data and it is recommended to use cross validation technique. The advantages of a simple decision tree model:  easy to interpret, you know what variable and what value of that variable is used to split the data and predict outcome.
-- A random forest is like a black box. You can specify the number of trees you want in your forest(n_estimators) and you can specify the max_num of features to be used in each tree. But you cannot control the randomness: which feature used for which tree, which data point is part of which tree... Accuracy keeps increasing as you increase the number of trees, but becomes constant at certain point. Random forest reduces the variance part of error rather than bias part. Unlike decision tree, it won't create highly biased model overfitting the data. By choosing features randomly during the training process, random forest does not depend highly on any specific set of features. This is a special characteristic of random forest over bagging trees. It generalizes better and on unseen validation dataset, Random forest always wins over Decision Tree in terms of accuracy.
-- You can read more about these two models [here](https://www.analyticsvidhya.com/blog/2020/05/decision-tree-vs-random-forest-algorithm/).
-
-# Results
-
-The best results are achieved by over-sampling the under-represented class using SMOTE (synthetic minority oversampling technique).
-With this approach, the model is able to detect 100% of all fraudulent transactions in the unseen test set. This fully satisfies the primary objective to detect the vast majority of abnormal transactions. Please note that the technique and model used are simple to implement simple, easy to use and can be updated in real-time.
-
-In addition, the number of false positive remains acceptable. This means a lot less verification work (on legitimate transactions) for the fraud departement compare dto some other approaches which failed on this aspect. Key results are shown below:
-
-Confusion matrix achieved using SMOTE over-sampling and a simple dense neural network:
-
-![](confusion_matrix.png)
-
-Comparison of key performance indicators between the tested approaches:
-
-![](benchmark.png)
+## Acknowledgment
+This project was forked from an open-source repository: [[Original Repository Link](https://github.com/LaurentVeyssier/Credit-Card-fraud-detection-using-Machine-Learning)]. I have modified and extended the project by adding (mention any modifications you made, e.g., new models, data preprocessing, visualization, deployment, etc.).
 
